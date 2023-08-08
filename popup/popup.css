@@ -1,0 +1,45 @@
+* {
+    margin: .1rem;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+body {
+    background-color: white;
+}
+
+header {
+    border-bottom: 1px solid white;
+    padding: 10px 5px;
+    text-align: center;
+    background: blue;
+    color: white;
+}
+
+p {
+    font-size: 14px;
+    text-align: center;
+    padding-bottom: 8px;
+}
+
+h1 {
+    transition: all 0.5s ease;
+}
+
+h1:hover {
+    cursor: default;
+    color: yellow;
+}
+
+form {
+    padding: 10px 5px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-around;
+    align-items: center;
+}
+
+.activeBox {
+    display: flex;
+}
