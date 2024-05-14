@@ -108,7 +108,7 @@ function autoSearch() {
         // insere a palavra no campo de pesquisa
         searchBar.value = palavrasAleatorias[palavra];
 
-        // criei um intervalo para realizar a pesquisa
+        // intervalo para realizar a pesquisa
         setInterval(() => {
             searchEnter.click();
         }, 1000);

@@ -1,6 +1,6 @@
 {
     "name": "AutoSearch",
-    "description": "Extensão criada com o intuito de me auxiliar a conseguir os pontos diários no rewards que são ganhos pesquisando através do Bing.",
+    "description": "Extensão criada com o intuito de me auxiliar a conseguir os pontos diários no Microsoft Rewards que são ganhos pesquisando através do motor de busca Bing.",
     "version": "1.2",
     "manifest_version": 3,
     "content_scripts": [
