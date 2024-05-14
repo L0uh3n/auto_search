@@ -81,7 +81,7 @@ function autoSearch() {
     /*
     Para que as palavras presentes no array palavrasAleatorias não repetissem, era necessário uma verificação.
     A solução encontrada foi usar a API do Chrome para armazenar o array contendo as palavras que já haviam sido usadas, 
-    o que não seria possível se eu tentasse de forma convencional, uma vez que, ao atualizar a página, o algoritmo "reiniciaria".
+    o que não seria possível se eu tentasse de forma convencional, uma vez que, ao atualizar a página, a extensão/algoritmo "reiniciaria".
     */
 
     // Recupera palavrasUtilizadas do armazenamento local do navegador
