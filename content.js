@@ -1,5 +1,4 @@
-// Função que gera as palavras aleatórias.
-function gerarPalavraAleatoria() {
+function autoSearch() {
     const palavrasAleatorias = [
         "abacaxi",
         "bicicleta",
@@ -79,28 +78,41 @@ function gerarPalavraAleatoria() {
         "zíper"
     ];
 
-    for (let i = 0; i < palavrasAleatorias.length; i++) {
-        var indice = Math.floor(Math.random() * palavrasAleatorias.length);
-    }
+    /*
+    Para que as palavras presentes no array palavrasAleatorias não repetissem, era necessário uma verificação.
+    A solução encontrada foi usar a API do Chrome para armazenar o array contendo as palavras que já haviam sido usadas, 
+    o que não seria possível se eu tentasse de forma convencional, uma vez que, ao atualizar a página, o algoritmo "reiniciaria".
+    */
 
-    return palavrasAleatorias[indice];
+    // Recupera palavrasUtilizadas do armazenamento local do navegador
+    chrome.storage.local.get('palavrasUtilizadas', function(data) {
+        var palavrasUtilizadas = data.palavrasUtilizadas || [];
+
+        if (palavrasUtilizadas.length == 90) {
+            palavrasUtilizadas = [];
+        }
+
+        let palavra;
+        do {
+            palavra = Math.floor(Math.random() * palavrasAleatorias.length);
+        } while (palavrasUtilizadas.includes(palavrasAleatorias[palavra]));
+
+        palavrasUtilizadas.push(palavrasAleatorias[palavra]);
+
+        // salva palavrasUtilizadas no armazenamento local do navegador
+        chrome.storage.local.set({'palavrasUtilizadas': palavrasUtilizadas});
+
+        const searchBar = document.getElementById("sb_form_q");
+        const searchEnter = document.getElementById("sb_form_go");
+
+        // insere a palavra no campo de pesquisa
+        searchBar.value = palavrasAleatorias[palavra];
+
+        // criei um intervalo para realizar a pesquisa
+        setInterval(() => {
+            searchEnter.click();
+        }, 1000);
+    });
 }
 
-var palavraAleatoria = gerarPalavraAleatoria();
-console.log(palavraAleatoria);
-
-// Função que insere as palavras geradas na caixa de texto e pesquisa automaticamente.
-function inserePalavraAleatoria() {
-    const searchBar = document.getElementById("sb_form_q");
-    const searchEnter = document.getElementById("sb_form_go");
-    console.log(searchBar);
-
-    searchBar.value = palavraAleatoria;
-    
-    // Criei um intervalo para realizar a pesquisa.
-    setInterval(() => {
-        searchEnter.click();
-    }, 1000);
-}
-
-setTimeout(inserePalavraAleatoria, 5000);
+setTimeout(autoSearch, 5000);
