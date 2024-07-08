@@ -88,7 +88,7 @@ function autoSearch() {
     chrome.storage.local.get('palavrasUtilizadas', function(data) {
         var palavrasUtilizadas = data.palavrasUtilizadas || [];
 
-        if (palavrasUtilizadas.length == 90) {
+        if (palavrasUtilizadas.length >= 90) {
             palavrasUtilizadas = [];
         }
 
@@ -100,19 +100,21 @@ function autoSearch() {
         palavrasUtilizadas.push(palavrasAleatorias[palavra]);
 
         // salva palavrasUtilizadas no armazenamento local do navegador
-        chrome.storage.local.set({'palavrasUtilizadas': palavrasUtilizadas});
+        chrome.storage.local.set({ 'palavrasUtilizadas': palavrasUtilizadas }, function() {
+            const searchBar = document.getElementById("sb_form_q");
+            const searchEnter = document.getElementById("sb_form_go");
 
-        const searchBar = document.getElementById("sb_form_q");
-        const searchEnter = document.getElementById("sb_form_go");
-
-        // insere a palavra no campo de pesquisa
-        searchBar.value = palavrasAleatorias[palavra];
-
-        // intervalo para realizar a pesquisa
-        setInterval(() => {
-            searchEnter.click();
-        }, 1000);
+            // intervalo para realizar a pesquisa
+            setTimeout(() => {
+                // insere a palavra no campo de pesquisa
+                searchBar.value = palavrasAleatorias[palavra];
+                
+                setTimeout(() => {
+                    searchEnter.click();
+                }, 1000);
+            }, 5000);
+        });
     });
 }
 
-setTimeout(autoSearch, 5000);
+autoSearch();
