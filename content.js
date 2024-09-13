@@ -1,81 +1,17 @@
 function autoSearch() {
     const palavrasAleatorias = [
-        "abacaxi",
-        "bicicleta",
-        "cachorro",
-        "diamante",
-        "elefante",
-        "foguete",
-        "girassol",
-        "hipopótamo",
-        "igreja",
-        "jacaré",
-        "kiwi",
-        "limonada",
-        "macarrão",
-        "nariz",
-        "ombrelone",
-        "panda",
-        "quadro",
-        "raposa",
-        "sapato",
-        "tigre",
-        "uva",
-        "violão",
-        "xadrez",
-        "yoga",
-        "zebra",
-        "abóbora",
-        "borboleta",
-        "carambola",
-        "dado",
-        "escada",
-        "foca",
-        "gato",
-        "hamburguer",
-        "índio",
-        "jardim",
-        "ketchup",
-        "leão",
-        "mochila",
-        "navio",
-        "óculos",
-        "pente",
-        "queijo",
-        "roda",
-        "sol",
-        "tatuagem",
-        "urso",
-        "viagem",
-        "waffle",
-        "xícara",
-        "yogurte",
-        "zoológico",
-        "anel",
-        "baleia",
-        "camisa",
-        "dente",
-        "escova",
-        "fogueira",
-        "globo",
-        "hamster",
-        "ilha",
-        "janela",
-        "karaokê",
-        "lua",
-        "meia",
-        "navalha",
-        "orelha",
-        "pipoca",
-        "queimadura",
-        "rosto",
-        "sol",
-        "tesoura",
-        "urso",
-        "ventilador",
-        "xícara",
-        "yo-yo",
-        "zíper"
+        "abacaxi", "bicicleta", "cachorro", "diamante", "elefante", "foguete", "girassol",
+        "hipopótamo", "igreja", "jacaré", "kiwi", "limonada", "macarrão", "nariz", "ombrelone",
+        "panda", "quadro", "raposa", "sapato", "tigre", "uva", "violão", "xadrez", "yoga",
+        "zebra", "abóbora", "borboleta", "carambola", "dado", "escada", "foca", "gato",
+        "hamburguer", "índio", "jardim", "ketchup", "leão", "mochila", "navio", "óculos",
+        "pente", "queijo", "roda", "sol", "tatuagem", "urso", "viagem", "waffle", "xícara",
+        "yogurte", "zoológico", "anel", "baleia", "camisa", "dente", "escova", "fogueira",
+        "globo", "hamster", "ilha", "janela", "karaokê", "lua", "meia", "navalha", "orelha",
+        "pipoca", "queimadura", "rosto", "sol", "tesoura", "urso", "ventilador", "xícara",
+        "yo-yo", "zíper", "banheira", "cacto", "dromedário", "estrela", "flauta", "golfinho",
+        "hortelã", "iglu", "jabuticaba", "karatê", "lobo", "manteiga", "nuvem", "orquestra",
+        "pinguim", "quintal", "relógio", "sorvete", "tartaruga", "unicórnio"
     ];
 
     /*
@@ -85,7 +21,10 @@ function autoSearch() {
     */
 
     // Recupera palavrasUtilizadas do armazenamento local do navegador
-    chrome.storage.local.get('palavrasUtilizadas', function(data) {
+    chrome.storage.local.get('palavrasUtilizadas', function (data) {
+        console.log(data);
+        console.log(palavrasUtilizadas);
+
         var palavrasUtilizadas = data.palavrasUtilizadas || [];
 
         if (palavrasUtilizadas.length >= 90) {
@@ -100,7 +39,7 @@ function autoSearch() {
         palavrasUtilizadas.push(palavrasAleatorias[palavra]);
 
         // salva palavrasUtilizadas no armazenamento local do navegador
-        chrome.storage.local.set({ 'palavrasUtilizadas': palavrasUtilizadas }, function() {
+        chrome.storage.local.set({ 'palavrasUtilizadas': palavrasUtilizadas }, function () {
             const searchBar = document.getElementById("sb_form_q");
             const searchEnter = document.getElementById("sb_form_go");
 
@@ -108,7 +47,7 @@ function autoSearch() {
             setTimeout(() => {
                 // insere a palavra no campo de pesquisa
                 searchBar.value = palavrasAleatorias[palavra];
-                
+
                 setTimeout(() => {
                     searchEnter.click();
                 }, 1000);

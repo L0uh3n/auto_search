@@ -9,7 +9,7 @@
           "js": ["content.js"]
         }
     ],
-    "permissions": ["tabs", "storage"],
+    "permissions": ["tabs", "storage", "unlimitedStorage"],
     "action": {
         "default_icon": "imgs/icon.png",
         "default_title": "AutoSearch",
