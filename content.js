@@ -54,7 +54,7 @@ function autoSearch() {
                 // agenda a próxima pesquisa após 5 segundos
                 setTimeout(autoSearch, 5000);
 
-            }, 1000);
+            }, 5000);
         });
     });
 }
