@@ -1,4 +1,5 @@
 function autoSearch() {
+    
     const palavrasAleatorias = [
         "abacaxi", "bicicleta", "cachorro", "diamante", "elefante", "foguete", "girassol",
         "hipopótamo", "igreja", "jacaré", "kiwi", "limonada", "macarrão", "nariz", "ombrelone",
@@ -35,7 +36,7 @@ function autoSearch() {
         do {
             palavra = Math.floor(Math.random() * palavrasAleatorias.length);
         } while (palavrasUtilizadas.includes(palavrasAleatorias[palavra]));
-
+        
         palavrasUtilizadas.push(palavrasAleatorias[palavra]);
 
         // salva palavrasUtilizadas no armazenamento local do navegador
@@ -43,17 +44,20 @@ function autoSearch() {
             const searchBar = document.getElementById("sb_form_q");
             const searchEnter = document.getElementById("sb_form_go");
 
+            // insere a palavra no campo de pesquisa
+            searchBar.value = palavrasAleatorias[palavra];
+
             // intervalo para realizar a pesquisa
             setTimeout(() => {
-                // insere a palavra no campo de pesquisa
-                searchBar.value = palavrasAleatorias[palavra];
+                searchEnter.click();
 
-                setTimeout(() => {
-                    searchEnter.click();
-                }, 1000);
-            }, 5000);
+                // agenda a próxima pesquisa após 5 segundos
+                setTimeout(autoSearch, 5000);
+
+            }, 1000);
         });
     });
 }
 
+// chama a primeira vez
 autoSearch();
