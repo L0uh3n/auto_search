@@ -52,7 +52,7 @@ function autoSearch() {
                 searchEnter.click();
 
                 // agenda a próxima pesquisa após 5 segundos
-                setTimeout(autoSearch, 5000);
+                setTimeout(autoSearch, 1000);
 
             }, 5000);
         });
