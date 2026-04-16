@@ -23,10 +23,10 @@ function autoSearch() {
 
     // Recupera palavrasUtilizadas do armazenamento local do navegador
     chrome.storage.local.get('palavrasUtilizadas', function (data) {
+        var palavrasUtilizadas = data.palavrasUtilizadas || [];
+        
         console.log(data);
         console.log(palavrasUtilizadas);
-
-        var palavrasUtilizadas = data.palavrasUtilizadas || [];
 
         if (palavrasUtilizadas.length >= 90) {
             palavrasUtilizadas = [];
@@ -49,10 +49,12 @@ function autoSearch() {
 
             // intervalo para realizar a pesquisa
             setTimeout(() => {
-                searchEnter.click();
-
+                if (searchBar && searchBar.form) {
+                    searchBar.form.submit();
+                }
+                
                 // agenda a próxima pesquisa após 5 segundos
-                setTimeout(autoSearch, 1000);
+                setTimeout(autoSearch, 5000);
 
             }, 5000);
         });
